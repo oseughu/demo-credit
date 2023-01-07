@@ -5,6 +5,10 @@ import config from './knexfile'
 so db access can be mocked for tests */
 
 const db =
-  process.env.NODE_ENV === 'development' ? knex(config.development) : knex(config.production)
+  process.env.NODE_ENV === 'development'
+    ? knex(config.development)
+    : process.env.NODE_ENV === 'production'
+    ? knex(config.production)
+    : knex(config.test)
 
 export default db
