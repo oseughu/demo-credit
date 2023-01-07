@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "target": "es2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "build",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "paths": {
+      "#src/*": ["./src/*.ts"],
+      "#database/*": ["./src/database/*.ts"],
+      "#controllers/*": ["./src/controllers/*.ts"],
+      "#services/*": ["./src/services/*.ts"],
+      "#middleware/*": ["./src/middleware/*.ts"],
+      "#utils/*": ["./src/utils/*.ts"],
+      "#routes": ["./src/routes/index.ts"],
+      "#routes/*": ["./src/routes/*.ts"]
+    },
+    "typeRoots": ["./typing-stubs", "./node_modules/@types"]
+  }
+}
