@@ -8,14 +8,9 @@ export default class authController {
   static async register(req: Request, res: Response) {
     try {
       const { firstName, lastName, email, password, confirmPassword } = req.body
-      const alreadyExists = await db.select().from('users').where({ email: email.toLowerCase() })
 
       if (password !== confirmPassword) {
         throw new Error('passwords do not match')
-      }
-
-      if (alreadyExists.length !== 0) {
-        throw new Error('user already exists. please login.')
       }
 
       authService.register(firstName, lastName, email, password)
@@ -45,7 +40,11 @@ export default class authController {
   }
 
   static authUser(req: IGetUserAuthInfoRequest, res: Response) {
-    res.send(req.user)
+    res.send({
+      id: req.user.id,
+      email: req.user.email,
+      balance: (+req.user.balance).toLocaleString()
+    })
   }
 
   static logout(req: Request, res: Response) {

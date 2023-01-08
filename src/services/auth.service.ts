@@ -3,7 +3,12 @@ import bcrypt from 'bcryptjs'
 
 export default class authService {
   static async register(firstName: string, lastName: string, email: string, password: string) {
+    const alreadyExists = await db.select().from('users').where({ email: email.toLowerCase() })
     const salt = await bcrypt.genSalt(10)
+
+    if (alreadyExists.length !== 0) {
+      throw new Error('user already exists. please login.')
+    }
 
     await db('users').insert({
       email,
