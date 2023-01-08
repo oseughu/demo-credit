@@ -44,6 +44,14 @@ export default class transactionService {
       throw new Error('insufficient funds. add more funds to your wallet')
     }
 
+    await db('transactions').insert({
+      amount,
+      type: 'transfer',
+      description,
+      recipient,
+      user_id: userId
+    })
+
     await db('users')
       .where({ id: userId })
       .update({
@@ -57,14 +65,6 @@ export default class transactionService {
           balance: +amount + +receiver.balance
         })
     }
-
-    await db('transactions').insert({
-      amount,
-      type: 'transfer',
-      description,
-      recipient,
-      user_id: userId
-    })
   }
 
   static async withdrawal(amount: number, description: string, userId: string): Promise<void> {
