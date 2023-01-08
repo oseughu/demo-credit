@@ -40,12 +40,16 @@ export default class transactionService {
       throw new Error('user not found.')
     }
 
-    if (!receiver) {
-      throw new Error('recipient not found.')
-    }
-
     if (+sender.balance < +amount) {
       throw new Error('insufficient funds. add more funds to your wallet')
+    }
+
+    if (receiver) {
+      await db('users')
+        .where({ email: recipient })
+        .update({
+          balance: +amount + +receiver.balance
+        })
     }
 
     await db('transactions').insert({
@@ -55,12 +59,6 @@ export default class transactionService {
       recipient,
       user_id: userId
     })
-
-    await db('users')
-      .where({ email: recipient })
-      .update({
-        balance: +amount + +receiver.balance
-      })
 
     await db('users')
       .where({ id: userId })

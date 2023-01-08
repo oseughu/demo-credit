@@ -22,7 +22,7 @@ export default class transactionController {
       })
     } catch (err) {
       console.log(err)
-      res.status(500).json('error processing deposit, please try again.')
+      res.status(500).send({ error: 'error processing deposit, please try again.' })
     }
   }
 
@@ -50,7 +50,7 @@ export default class transactionController {
       })
     } catch (err) {
       console.log(err)
-      res.status(500).json('error processing transfer, please try again.')
+      res.status(500).send({ error: 'error processing transfer, please try again.' })
     }
   }
 
@@ -71,7 +71,7 @@ export default class transactionController {
       })
     } catch (err) {
       console.log(err)
-      res.status(500).json('error processing withdrawal, please try again.')
+      res.status(500).send({ error: 'error processing withdrawal, please try again.' })
     }
   }
 }
