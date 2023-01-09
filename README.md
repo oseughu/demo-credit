@@ -29,7 +29,7 @@ This is an example of how to list things you need to use the software and how to
 
 ```sh
 
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/oseughu/demo-credit.git
 
 ```
 
@@ -62,10 +62,6 @@ DB_URI_TEST=
 USER=  # FOR HASHING USER PASSWORD WHEN SEEDING
 
 ```
-
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
