@@ -17,7 +17,7 @@ declare module 'express-session' {
 
 const port = +process.env.PORT
 // @ts-ignore
-const store = new KnexSessionStore(db) // defaults to a sqlite3 database
+const store = new KnexSessionStore({ knex: db }) // defaults to a sqlite3 database
 
 const createServer = () => {
   const app: Application = express()
