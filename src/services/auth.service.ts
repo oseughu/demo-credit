@@ -20,11 +20,12 @@ export default class authService {
 
   static async login(email: string, password: string) {
     const user = await db.select().from('users').where({ email }).first()
-    const checkPassword = await bcrypt.compare(password, user.password)
 
     if (!user) {
       throw new Error('user not found. please create an account')
     }
+
+    const checkPassword = await bcrypt.compare(password, user.password)
 
     if (!checkPassword) {
       throw new Error('invalid credentials.')
