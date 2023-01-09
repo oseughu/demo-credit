@@ -74,4 +74,31 @@ export default class transactionController {
       res.status(500).send({ error: 'error processing withdrawal, please try again.' })
     }
   }
+
+  static async userTransactions(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
+    try {
+      const { id } = req.user
+
+      const transactions = await transactionService.userTransactions(id)
+
+      res.send(transactions)
+    } catch (err) {
+      console.log(err)
+      res.status(401).send({ error: 'you are not authorized to view these transactions.' })
+    }
+  }
+
+  static async singleUserTransaction(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
+    try {
+      const { id } = req.user
+      const { transactionId } = req.params
+
+      const transaction = await transactionService.singleUserTransaction(id, transactionId)
+
+      res.send(transaction)
+    } catch (err) {
+      console.log(err)
+      res.status(401).send({ error: 'you are not authorized to view these transactions.' })
+    }
+  }
 }
