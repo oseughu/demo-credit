@@ -4,10 +4,10 @@
 
 # Demo Credit
 
-[![Stargazers][stars-shield]][https://github.com/oseughu/demo-credit/stargazers]
-[![Issues][issues-shield]][https://github.com/oseughu/demo-credit/issues]
-[![MIT License][license-shield]][https://github.com/oseughu/demo-credit/blob/master/license.txt]
-[![LinkedIn][linkedin-shield]][https://linkedin.com/in/oseughu]
+[![Stargazers][stars-shield]](https://github.com/oseughu/demo-credit/stargazers)
+[![Issues][issues-shield]](https://github.com/oseughu/demo-credit/issues)
+[![MIT License][license-shield]](https://github.com/oseughu/demo-credit/blob/master/license.txt)
+[![LinkedIn][linkedin-shield]](https://linkedin.com/in/oseughu)
 
 <!-- ABOUT THE PROJECT -->
 
