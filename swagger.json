@@ -1,0 +1,205 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Demo Credit API",
+    "version": "1.0.0",
+    "description": "This is an API built for a demo credit wallet",
+    "contact": {
+      "name": "Ose Ughu",
+      "url": "https://oseughu.com",
+      "email": "oseughu@email.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3005/",
+      "description": "Local Dev"
+    },
+    {
+      "url": "https://ose-ughu-lendsqr-be-test.cyclic.app/",
+      "description": "prod, from cyclic"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Demo Credit",
+      "description": "This is an API built for a demo credit wallet"
+    }
+  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": ["Demo Credit"],
+        "summary": "Create a new user with 0.00 balance",
+        "requestBody": {
+          "description": "User Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Cat"
+              }
+            }
+          }
+        },
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/cats/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the cat that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Demo Credit"],
+        "summary": "Get cat with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Cat with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          },
+          "404": {
+            "description": "Failed. Cat not found."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update cat with given ID",
+        "tags": ["Demo Credit"],
+        "requestBody": {
+          "description": "Cat Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Cat"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Cat with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          },
+          "404": {
+            "description": "Failed. Cat not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete cat with given ID",
+        "tags": ["Demo Credit"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Delete Cat with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          },
+          "404": {
+            "description": "Failed. Cat not found."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "id": {
+      "properties": {
+        "uuid": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "string"
+        }
+      }
+    },
+    "Cats": {
+      "type": "object",
+      "properties": {
+        "cats": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Cat"
+          }
+        }
+      }
+    }
+  }
+}

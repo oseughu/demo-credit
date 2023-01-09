@@ -1,9 +1,11 @@
 import routes from '#routes'
-import swaggerDocs from '#utils/swagger'
 import cors from 'cors'
 import 'dotenv/config'
 import express, { Application, json, Request, Response, urlencoded } from 'express'
 import session from 'express-session'
+import swaggerUi from 'swagger-ui-express'
+// @ts-ignore
+import * as swaggerDoc from '../swagger.json'
 
 declare module 'express-session' {
   export interface SessionData {
@@ -33,11 +35,10 @@ const createServer = () => {
   app.use(json())
   app.use(cors())
   app.use('/api/v1', routes)
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
   app.get('/', (req: Request, res: Response) => {
     res.send({ message: 'Welcome to the Demo Credit API!' })
   })
-
-  swaggerDocs(app, port)
 
   return app
 }
