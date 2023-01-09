@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 
 const checkAuth = async (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) => {
   try {
+    //@ts-ignore
     const cookie = req.session.jwt
     const claims: any = jwt.verify(cookie, process.env.SECRET)
 

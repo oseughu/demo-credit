@@ -1,4 +1,3 @@
-import db from '#database/db'
 import authService from '#services/auth.service'
 import { IGetUserAuthInfoRequest } from '#utils/interface'
 import { Request, Response } from 'express'
@@ -30,6 +29,7 @@ export default class authController {
 
       const token = jwt.sign({ id: user.id }, process.env.SECRET)
 
+      //@ts-ignore
       req.session.jwt = token
 
       res.send({ status: 'ok', message: 'logged in successfully' })
