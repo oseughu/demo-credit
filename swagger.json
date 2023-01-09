@@ -1,5 +1,5 @@
 {
-  "swagger": "2.0.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Demo Credit API",
     "version": "1.0.0",
@@ -7,7 +7,7 @@
     "contact": {
       "name": "Ose Ughu",
       "url": "https://oseughu.com",
-      "email": "oseughu@email.com"
+      "email": "oseughu@gmail.com"
     }
   },
   "components": {
@@ -48,10 +48,7 @@
         },
         "responses": {
           "201": {
-            "description": "Ok. Sign Up Successful",
-            "schema": {
-              "$ref": "#/definitions/id"
-            }
+            "description": "Ok. Sign Up Successful"
           },
           "500": {
             "description": "Failed. User already exists or a required field is missing."
@@ -224,13 +221,6 @@
     }
   },
   "definitions": {
-    "id": {
-      "properties": {
-        "uuid": {
-          "type": "string"
-        }
-      }
-    },
     "UserSignUp": {
       "type": "object",
       "properties": {
@@ -314,9 +304,6 @@
           "type": "string"
         },
         "recipient": {
-          "type": "string"
-        },
-        "confirmRecipient": {
           "type": "string"
         }
       }
