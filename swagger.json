@@ -21,12 +21,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3005/api/v1",
-      "description": "Local Dev"
-    },
-    {
-      "url": "https://ose-ughu-lendsqr-be-test.cyclic.app/api/v1",
-      "description": "prod, from cyclic"
+      "url": "https://ose-ughu-lendsqr-be-test.cyclic.app/api/v1"
     }
   ],
   "consumes": ["application/json"],
