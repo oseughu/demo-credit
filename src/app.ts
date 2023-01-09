@@ -9,13 +9,7 @@ import swaggerUi from 'swagger-ui-express'
 // @ts-ignore
 import * as swaggerDoc from '../swagger.json'
 
-declare module 'express-session' {
-  export interface SessionData {
-    jwt: string
-  }
-}
-
-const port = +process.env.PORT
+const port = process.env.PORT
 // @ts-ignore
 const knexStore = new KnexSessionStore(session)
 const store = new knexStore({

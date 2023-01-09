@@ -21,6 +21,6 @@
       "#routes": ["./src/routes/index.ts"],
       "#routes/*": ["./src/routes/*.ts"]
     },
-    "typeRoots": ["./typing-stubs", "./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types", "./types"]
   }
 }
