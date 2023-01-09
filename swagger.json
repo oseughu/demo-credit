@@ -12,18 +12,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3005/",
+      "url": "http://localhost:3005/api/v1",
       "description": "Local Dev"
     },
     {
-      "url": "https://ose-ughu-lendsqr-be-test.cyclic.app/",
+      "url": "https://ose-ughu-lendsqr-be-test.cyclic.app/api/v1",
       "description": "prod, from cyclic"
-    }
-  ],
-  "tags": [
-    {
-      "name": "Demo Credit",
-      "description": "This is an API built for a demo credit wallet"
     }
   ],
   "consumes": ["application/json"],
@@ -31,7 +25,6 @@
   "paths": {
     "/register": {
       "post": {
-        "tags": ["Demo Credit"],
         "summary": "Create a new user with 0.00 balance",
         "requestBody": {
           "description": "User Object",
@@ -39,124 +32,182 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/Cat"
+                "$ref": "#/definitions/User"
               }
             }
           }
         },
-        "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Ok",
             "schema": {
               "$ref": "#/definitions/id"
             }
           },
-          "400": {
-            "description": "Failed. Bad post data."
+          "500": {
+            "description": "Failed. User already exists or a required field is missing."
           }
         }
       }
     },
-    "/cats/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "ID of the cat that we want to match",
-          "type": "string"
-        }
-      ],
-      "get": {
-        "tags": ["Demo Credit"],
-        "summary": "Get cat with given ID",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Cat with id",
-            "schema": {
-              "$ref": "#/definitions/id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Cat"
-            }
-          },
-          "404": {
-            "description": "Failed. Cat not found."
-          }
-        }
-      },
-      "put": {
-        "summary": "Update cat with given ID",
-        "tags": ["Demo Credit"],
+    "/login": {
+      "post": {
+        "summary": "Sign in User",
         "requestBody": {
-          "description": "Cat Object",
+          "description": "User Login Object",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/Cat"
+                "$ref": "#/definitions/UserLogin"
               }
             }
           }
         },
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Cat with new values of properties",
-            "schema": {
-              "$ref": "#/definitions/id"
-            }
-          }
-        ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Cat"
-            }
+            "description": "OK"
           },
-          "400": {
-            "description": "Failed. Bad post data."
-          },
-          "404": {
-            "description": "Failed. Cat not found."
+          "401": {
+            "description": "Failed. Invalid credentials."
           }
         }
-      },
-      "delete": {
-        "summary": "Delete cat with given ID",
-        "tags": ["Demo Credit"],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Delete Cat with id",
-            "schema": {
-              "$ref": "#/definitions/id"
-            }
-          }
-        ],
+      }
+    },
+    "/user": {
+      "get": {
+        "summary": "Get the current logged in user",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/id"
+              "$ref": "#/definitions/CurrentUser"
             }
           },
-          "404": {
-            "description": "Failed. Cat not found."
+          "401": {
+            "description": "Failed. User not logged in."
+          }
+        }
+      }
+    },
+    "/deposit": {
+      "post": {
+        "summary": "Add funds to your wallet",
+        "requestBody": {
+          "description": "Deposit Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Deposit"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "401": {
+            "description": "Failed. User not logged in."
+          }
+        }
+      }
+    },
+    "/transfer": {
+      "post": {
+        "summary": "Transfer funds from your wallet to another user on Demo Credit",
+        "requestBody": {
+          "description": "Transfer Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Transfer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "401": {
+            "description": "Failed. User not logged in."
+          }
+        }
+      }
+    },
+    "/withdrawal": {
+      "post": {
+        "summary": "Withdraw funds from your wallet",
+        "requestBody": {
+          "description": "Withdrawal Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Transfer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "401": {
+            "description": "Failed. User not logged in."
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "get": {
+        "summary": "Get the transactions of the current logged in user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "401": {
+            "description": "Failed. User not logged in."
+          }
+        }
+      }
+    },
+    "/transactions/{transactionId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the transaction needed",
+            "type": "string"
+          }
+        ],
+        "summary": "Get a transaction of the current logged in user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "401": {
+            "description": "Failed. User not logged in."
           }
         }
       }
@@ -184,20 +235,73 @@
         },
         "password": {
           "type": "string"
+        }
+      }
+    },
+    "CurrentUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
         },
         "balance": {
           "type": "string"
         }
       }
     },
-    "Cats": {
+    "UserLogin": {
       "type": "object",
       "properties": {
-        "cats": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Cat"
-          }
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Deposit": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Transfer": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        },
+        "recipient": {
+          "type": "string"
+        }
+      }
+    },
+    "Transaction": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "recipient": {
+          "type": "string"
         }
       }
     }
