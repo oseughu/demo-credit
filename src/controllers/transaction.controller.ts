@@ -17,7 +17,7 @@ export default class transactionController {
       res.status(201).send({
         status: 'ok',
         message: 'deposit successful.',
-        amount,
+        amount: amount.toLocaleString(),
         balance: balance.toLocaleString()
       })
     } catch (err) {
@@ -44,7 +44,7 @@ export default class transactionController {
       res.send({
         status: 'ok',
         message: 'transfer successful.',
-        amount,
+        amount: amount.toLocaleString(),
         recipient,
         balance: balance.toLocaleString()
       })
@@ -70,7 +70,7 @@ export default class transactionController {
       res.send({
         status: 'ok',
         message: 'withdrawal successful.',
-        amount,
+        amount: amount.toLocaleString(),
         balance: balance.toLocaleString()
       })
     } catch (err) {
