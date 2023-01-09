@@ -19,6 +19,7 @@ const port = +process.env.PORT
 // @ts-ignore
 const knexStore = new KnexSessionStore(session)
 const store = new knexStore({
+  knex: db,
   sidfieldname: 'session-id',
   clearInterval: 60000,
   createtable: true,
