@@ -7,6 +7,9 @@
 
 This an API built for a demo credit wallet for the Lendsqr backend engineer assessment.
 
+View the docs [here](https://ose-ughu-lendsqr-be-test.cyclic.app/api/v1/docs)
+View the postman collection [here](https://ose-ughu-lendsqr-be-test.cyclic.app/docs)
+
 ### Built With
 
 [![Node.js Logo](https://nodejs.org/static/images/logo-light.svg)](https://nodejs.org)
