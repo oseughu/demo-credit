@@ -40,6 +40,10 @@ export default class transactionService {
       throw new Error('user not found.')
     }
 
+    if (!receiver) {
+      throw new Error('user not found.')
+    }
+
     if (+sender.balance < +amount) {
       throw new Error('insufficient funds. add more funds to your wallet')
     }
@@ -58,16 +62,19 @@ export default class transactionService {
         balance: +sender.balance - +amount
       })
 
-    if (receiver) {
-      await db('users')
-        .where({ email: recipient })
-        .update({
-          balance: +amount + +receiver.balance
-        })
-    }
+    await db('users')
+      .where({ email: recipient })
+      .update({
+        balance: +amount + +receiver.balance
+      })
   }
 
-  static async withdrawal(amount: number, description: string, userId: string): Promise<void> {
+  static async withdrawal(
+    amount: number,
+    description: string,
+    userId: string,
+    recipient: string
+  ): Promise<void> {
     const user = await db.select('balance', 'email').from('users').where({ id: userId }).first()
 
     if (!user) {
