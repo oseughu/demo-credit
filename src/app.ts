@@ -1,4 +1,6 @@
+import db from '#database/db'
 import routes from '#routes'
+import KnexSessionStore from 'connect-session-knex'
 import cors from 'cors'
 import 'dotenv/config'
 import express, { Application, json, Request, Response, urlencoded } from 'express'
@@ -14,6 +16,8 @@ declare module 'express-session' {
 }
 
 const port = +process.env.PORT
+// @ts-ignore
+const store = new KnexSessionStore(db) // defaults to a sqlite3 database
 
 const createServer = () => {
   const app: Application = express()
@@ -27,7 +31,8 @@ const createServer = () => {
         maxAge: 24 * 60 * 60 * 100,
         sameSite: 'none',
         secure: process.env.NODE_ENV === 'development' ? false : true
-      }
+      },
+      store
     })
   )
 
