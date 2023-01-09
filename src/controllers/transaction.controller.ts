@@ -56,10 +56,10 @@ export default class transactionController {
 
   static async withdrawal(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
     try {
-      const { amount, description } = req.body
+      const { amount, description, recipient } = req.body
       const { id } = req.user
 
-      await transactionService.withdrawal(amount, description, id)
+      await transactionService.withdrawal(amount, description, id, recipient)
 
       balance = +req.user.balance - +amount
 
