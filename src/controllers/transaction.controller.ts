@@ -44,8 +44,8 @@ export default class transactionController {
       res.send({
         status: 'ok',
         message: 'transfer successful.',
-        amount: amount.toLocaleString(),
         recipient,
+        amount: amount.toLocaleString(),
         balance: balance.toLocaleString()
       })
     } catch (err) {
@@ -70,6 +70,7 @@ export default class transactionController {
       res.send({
         status: 'ok',
         message: 'withdrawal successful.',
+        recipient,
         amount: amount.toLocaleString(),
         balance: balance.toLocaleString()
       })

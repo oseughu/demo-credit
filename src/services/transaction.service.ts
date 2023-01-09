@@ -103,6 +103,7 @@ export default class transactionService {
   static async userTransactions(userId: string) {
     const transactions = await db
       .select(
+        'transactions.id',
         'transactions.amount',
         'transactions.description',
         'transactions.type',
@@ -120,6 +121,7 @@ export default class transactionService {
   static async singleUserTransaction(userId: string, transactionId: string) {
     await db
       .select(
+        'transactions.id',
         'transactions.amount',
         'transactions.description',
         'transactions.type',
