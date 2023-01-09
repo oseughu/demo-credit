@@ -1,10 +1,10 @@
 import db from '#database/db'
 import routes from '#routes'
-import KnexSessionStore from 'connect-session-knex'
 import cors from 'cors'
 import 'dotenv/config'
 import express, { Application, json, Request, Response, urlencoded } from 'express'
 import session from 'express-session'
+import MemoryStore from 'memorystore'
 import swaggerUi from 'swagger-ui-express'
 // @ts-ignore
 import * as swaggerDoc from '../swagger.json'
@@ -16,8 +16,6 @@ declare module 'express-session' {
 }
 
 const port = +process.env.PORT
-// @ts-ignore
-const store = new KnexSessionStore({ knex: db }) // defaults to a sqlite3 database
 
 const createServer = () => {
   const app: Application = express()
@@ -32,7 +30,11 @@ const createServer = () => {
         sameSite: 'none',
         secure: process.env.NODE_ENV === 'development' ? false : true
       },
-      store
+      // @ts-ignore
+      store: new MemoryStore({
+        // @ts-ignore
+        checkPeriod: 86400000 // prune expired entries every 24h
+      })
     })
   )
 
