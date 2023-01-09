@@ -17,7 +17,13 @@ declare module 'express-session' {
 
 const port = +process.env.PORT
 // @ts-ignore
-const store = new KnexSessionStore({ knex: db })
+const knexStore = new KnexSessionStore(session)
+const store = new knexStore({
+  sidfieldname: 'session-id',
+  clearInterval: 60000,
+  createtable: true,
+  tablename: 'sessions'
+})
 
 const createServer = () => {
   const app: Application = express()
