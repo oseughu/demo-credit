@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0.0",
   "info": {
     "title": "Demo Credit API",
     "version": "1.0.0",
@@ -8,6 +8,15 @@
       "name": "Ose Ughu",
       "url": "https://oseughu.com",
       "email": "oseughu@email.com"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "authorization",
+        "in": "cookie",
+        "name": "jwt"
+      }
     }
   },
   "servers": [
@@ -39,7 +48,7 @@
         },
         "responses": {
           "201": {
-            "description": "Ok",
+            "description": "Ok. Sign Up Successful",
             "schema": {
               "$ref": "#/definitions/id"
             }
@@ -54,7 +63,7 @@
       "post": {
         "summary": "Sign in User",
         "requestBody": {
-          "description": "User Login Object",
+          "description": "A JSON object containing the email and password.",
           "required": true,
           "content": {
             "application/json": {
@@ -66,7 +75,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Ok. Login Successful"
           },
           "401": {
             "description": "Failed. Invalid credentials."
@@ -77,6 +86,7 @@
     "/user": {
       "get": {
         "summary": "Get the current logged in user",
+        "security": { "OAuth2": [] },
         "responses": {
           "200": {
             "description": "OK",
@@ -173,7 +183,7 @@
     },
     "/transactions": {
       "get": {
-        "summary": "Get the transactions of the current logged in user",
+        "summary": "Get transactions of the current logged in user",
         "responses": {
           "200": {
             "description": "OK",
@@ -221,7 +231,7 @@
         }
       }
     },
-    "User": {
+    "UserSignUp": {
       "type": "object",
       "properties": {
         "first_name": {
@@ -230,6 +240,17 @@
         "last_name": {
           "type": "string"
         },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserLogin": {
+      "type": "object",
+      "properties": {
         "email": {
           "type": "string"
         },
@@ -248,17 +269,6 @@
           "type": "string"
         },
         "balance": {
-          "type": "string"
-        }
-      }
-    },
-    "UserLogin": {
-      "type": "object",
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "password": {
           "type": "string"
         }
       }
@@ -285,6 +295,9 @@
         },
         "recipient": {
           "type": "string"
+        },
+        "confirmRecipient": {
+          "type": "string"
         }
       }
     },
@@ -301,6 +314,9 @@
           "type": "string"
         },
         "recipient": {
+          "type": "string"
+        },
+        "confirmRecipient": {
           "type": "string"
         }
       }

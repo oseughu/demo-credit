@@ -56,8 +56,12 @@ export default class transactionController {
 
   static async withdrawal(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
     try {
-      const { amount, description, recipient } = req.body
+      const { amount, description, recipient, confirmRecipient } = req.body
       const { id } = req.user
+
+      if (recipient !== confirmRecipient) {
+        throw new Error('recipients do not match')
+      }
 
       await transactionService.withdrawal(amount, description, id, recipient)
 
