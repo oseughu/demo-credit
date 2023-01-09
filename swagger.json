@@ -41,7 +41,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/UserSignUp"
               }
             }
           }
