@@ -35,7 +35,7 @@ const createServer = () => {
   app.use(json())
   app.use(cors())
   app.use('/api/v1', routes)
-  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
+  app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
   app.get('/', (req: Request, res: Response) => {
     res.send({ message: 'Welcome to the Demo Credit API!' })
   })
