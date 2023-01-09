@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 
 export default class authService {
   static async register(firstName: string, lastName: string, email: string, password: string) {
-    const alreadyExists = await db.select().from('users').where({ email: email.toLowerCase() })
+    const alreadyExists = await db.select().from('users').where('email', '=', `${email}`)
     const salt = await bcrypt.genSalt(10)
 
     if (alreadyExists.length !== 0) {
@@ -19,7 +19,7 @@ export default class authService {
   }
 
   static async login(email: string, password: string) {
-    const user = await db.select().from('users').where({ email: email }).first()
+    const user = await db.select().from('users').where('email', '=', `${email}`).first()
 
     if (!user) {
       throw new Error('user not found. please create an account')
