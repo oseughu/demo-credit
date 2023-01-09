@@ -1,20 +1,17 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-
 # Demo Credit
 
-[![MIT License][license-shield]](https://github.com/oseughu/demo-credit/blob/master/license.txt)
+![Zero Issues Shield](https://img.shields.io/badge/issues-0-brightgreen)
+[![GitHub stars](https://img.shields.io/github/stars/oseughu/demo-credit.svg)](https://github.com/oseughu/demo-credit)
 
-[![LinkedIn][linkedin-shield]](https://linkedin.com/in/oseughu)
-
-<!-- ABOUT THE PROJECT -->
-
-## Demo Credit
+## About The Project
 
 This an API built for a demo credit wallet for the Lendsqr backend engineer assessment.
 
 ### Built With
 
 [![Node.js Logo](https://nodejs.org/static/images/logo-light.svg)](https://nodejs.org)
+![Knex.js Logo](https://raw.githubusercontent.com/knex/media/master/knex.png)
+![MySQL Logo](https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/1200px-MySQL.svg.png)
 
 ## Getting Started
 
@@ -80,6 +77,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@oseughu](https://twitter.com/oseughu) - oseughu@gmail.com
+Twitter - [@oseughu](https://twitter.com/oseughu)
+Email - oseughu@gmail.com
 
 Project Link: [https://github.com/oseughu/demo-credit](https://github.com/oseughu/demo-credit)
