@@ -92,4 +92,25 @@ export default class transactionService {
         balance: +user.balance - +amount
       })
   }
+
+  static async userTransactions(userId: string) {
+    const transactions = await db
+      .select()
+      .from('transactions')
+      .join('users', 'transactions.user_id', `users.id`)
+      .where({ user_id: userId })
+      .limit(5)
+      .offset(1)
+
+    return transactions
+  }
+
+  static async singleUserTransaction(userId: string, transactionId: string) {
+    await db
+      .select()
+      .from('transactions')
+      .join('users', 'transactions.user_id', `users.id`)
+      .where({ user_id: userId, id: transactionId })
+      .first()
+  }
 }
