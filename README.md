@@ -10,8 +10,6 @@ This an API built for a demo credit wallet for the Lendsqr backend engineer asse
 ### Built With
 
 [![Node.js Logo](https://nodejs.org/static/images/logo-light.svg)](https://nodejs.org)
-![Knex.js Logo](https://raw.githubusercontent.com/knex/media/master/knex.png)
-![MySQL Logo](https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/1200px-MySQL.svg.png)
 
 ## Getting Started
 
