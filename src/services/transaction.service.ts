@@ -104,7 +104,7 @@ export default class transactionService {
     const transactions = await db
       .select(
         'transactions.amount',
-        'transactions.descripition',
+        'transactions.description',
         'transactions.type',
         'transactions.recipient'
       )
@@ -121,7 +121,7 @@ export default class transactionService {
     await db
       .select(
         'transactions.amount',
-        'transactions.descripition',
+        'transactions.description',
         'transactions.type',
         'transactions.recipient'
       )
