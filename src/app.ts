@@ -1,10 +1,9 @@
 import routes from '#routes'
+import swaggerDocs from '#utils/swagger'
 import cors from 'cors'
 import 'dotenv/config'
 import express, { Application, json, Request, Response, urlencoded } from 'express'
 import session from 'express-session'
-import swaggerJsdoc from 'swagger-jsdoc'
-import swaggerUi from 'swagger-ui-express'
 
 declare module 'express-session' {
   export interface SessionData {
@@ -12,7 +11,7 @@ declare module 'express-session' {
   }
 }
 
-const port = process.env.PORT
+const port = +process.env.PORT
 
 const createServer = () => {
   const app: Application = express()
@@ -34,15 +33,16 @@ const createServer = () => {
   app.use(json())
   app.use(cors())
   app.use('/api/v1', routes)
+  app.get('/', (req: Request, res: Response) => {
+    res.send({ message: 'Welcome to the Demo Credit API!' })
+  })
+
+  swaggerDocs(app, port)
 
   return app
 }
 
 const app = createServer()
-
-app.get('/', (req: Request, res: Response) => {
-  res.send({ message: 'Welcome to the Demo Credit API!' })
-})
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}.`)
