@@ -102,7 +102,12 @@ export default class transactionService {
 
   static async userTransactions(userId: string) {
     const transactions = await db
-      .select()
+      .select(
+        'transactions.amount',
+        'transactions.descripition',
+        'transactions.type',
+        'transactions.recipient'
+      )
       .from('transactions')
       .join('users', 'transactions.user_id', `users.id`)
       .where({ user_id: userId })
@@ -114,7 +119,12 @@ export default class transactionService {
 
   static async singleUserTransaction(userId: string, transactionId: string) {
     await db
-      .select()
+      .select(
+        'transactions.amount',
+        'transactions.descripition',
+        'transactions.type',
+        'transactions.recipient'
+      )
       .from('transactions')
       .join('users', 'transactions.user_id', `users.id`)
       .where({ user_id: userId, id: transactionId })
