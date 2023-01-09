@@ -16,6 +16,7 @@
   "scripts": {
     "prebuild": "rm -rf ./build",
     "build": "tsc",
+    "prestart": "npm run migrate",
     "start": "node build/app.js",
     "dev": "tsc-watch --onSuccess \"ts-node src/app.ts\"",
     "postinstall": "npm run build",
