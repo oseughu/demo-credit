@@ -119,7 +119,7 @@ export default class transactionService {
   }
 
   static async singleUserTransaction(userId: string, transactionId: string) {
-    await db
+    const transaction = await db
       .select(
         'transactions.id',
         'transactions.amount',
@@ -129,7 +129,10 @@ export default class transactionService {
       )
       .from('transactions')
       .join('users', 'transactions.user_id', `users.id`)
-      .where({ user_id: userId, id: transactionId })
+      .where('transactions.user_id', '=', `${userId}`)
+      .andWhere('transactions.id', '=', `${transactionId}`)
       .first()
+
+    return transaction
   }
 }
