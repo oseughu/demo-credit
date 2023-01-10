@@ -10,12 +10,13 @@ export default class authService {
     }
 
     const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(password, salt)
 
     await db('users').insert({
       email,
       first_name: firstName,
       last_name: lastName,
-      password: await bcrypt.hash(password, salt)
+      password: hash
     })
   }
 
