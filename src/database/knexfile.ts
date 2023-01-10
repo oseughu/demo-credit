@@ -16,7 +16,7 @@ const config: IKnexConfig = {
       database: process.env.DB_NAME_DEV
     },
     pool: {
-      min: 2,
+      min: 0,
       max: 10
     },
     migrations: {
@@ -34,7 +34,7 @@ const config: IKnexConfig = {
       database: process.env.DB_NAME_PROD
     },
     pool: {
-      min: 2,
+      min: 0,
       max: 10
     },
     migrations: {
@@ -52,7 +52,7 @@ const config: IKnexConfig = {
       database: process.env.DB_NAME_TEST
     },
     pool: {
-      min: 2,
+      min: 0,
       max: 10
     },
     seeds: {
