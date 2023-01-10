@@ -45,7 +45,7 @@
           "201": {
             "description": "Ok. Sign Up Successful"
           },
-          "500": {
+          "400": {
             "description": "Failed. User already exists or a required field is missing."
           }
         }
