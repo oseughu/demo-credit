@@ -1,6 +1,5 @@
 import routes from '#routes'
 import store from '#utils/knexStore'
-import cors from 'cors'
 import 'dotenv/config'
 import express, { Application, json, Request, Response, urlencoded } from 'express'
 import session from 'express-session'
@@ -29,7 +28,6 @@ const createServer = () => {
 
   app.use(urlencoded({ extended: true }))
   app.use(json())
-  app.use(cors())
   app.use('/api/v1', routes)
   app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
   app.get('/', (req: Request, res: Response) => {
