@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import 'dotenv/config'
 import { Knex } from 'knex'
 
-const hash = bcrypt.hashSync(process.env.USER, 10)
+const hash = bcrypt.hashSync(process.env.USER_PASSWORD, 10)
 
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
