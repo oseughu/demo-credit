@@ -1,10 +1,11 @@
-process.env.NODE_ENV = 'test'
-import db from '#database/db'
 import createServer from '#src/app'
 import payload from '#utils/payload'
 import supertest from 'supertest'
+import config from '#database/knexfile'
+import knex from 'knex'
 
 const app = createServer()
+const db = knex(config.test)
 
 describe('authentication flow test', () => {
   beforeEach(function (done) {

@@ -1,7 +1,7 @@
 import db from '#database/db'
 
 export default class transactionService {
-  static async deposit(amount: number, description: string, userId: string): Promise<void> {
+  static async deposit(amount, description, userId) {
     const user = await db.select('balance', 'email').from('users').where({ id: userId }).first()
 
     if (!user) {
@@ -23,12 +23,7 @@ export default class transactionService {
       })
   }
 
-  static async transfer(
-    amount: number,
-    description: string,
-    userId: string,
-    recipient: string
-  ): Promise<void> {
+  static async transfer(amount, description, userId, recipient) {
     const sender = await db.select('balance', 'email').from('users').where({ id: userId }).first()
     const receiver = await db
       .select('balance', 'email')
@@ -41,7 +36,7 @@ export default class transactionService {
     }
 
     if (!receiver) {
-      throw new Error('user not found.')
+      throw new Error('recipient not found.')
     }
 
     if (+sender.balance < +amount) {
@@ -69,12 +64,7 @@ export default class transactionService {
       })
   }
 
-  static async withdrawal(
-    amount: number,
-    description: string,
-    userId: string,
-    recipient: string
-  ): Promise<void> {
+  static async withdrawal(amount, description, userId, recipient) {
     const user = await db.select('balance', 'email').from('users').where({ id: userId }).first()
 
     if (!user) {
@@ -89,7 +79,7 @@ export default class transactionService {
       amount,
       type: 'withdrawal',
       description,
-      recipient: user.email,
+      recipient,
       user_id: userId
     })
 
@@ -100,7 +90,7 @@ export default class transactionService {
       })
   }
 
-  static async userTransactions(userId: string) {
+  static async userTransactions(userId) {
     const transactions = await db
       .select(
         'transactions.id',
@@ -118,7 +108,7 @@ export default class transactionService {
     return transactions
   }
 
-  static async singleUserTransaction(userId: string, transactionId: string) {
+  static async singleUserTransaction(userId, transactionId) {
     const transaction = await db
       .select(
         'transactions.id',

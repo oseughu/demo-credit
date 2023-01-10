@@ -2,7 +2,6 @@ import db from '#database/db'
 import KnexSessionStore from 'connect-session-knex'
 import session from 'express-session'
 
-// @ts-ignore
 const knexStore = new KnexSessionStore(session)
 
 const store = new knexStore({

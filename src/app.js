@@ -1,16 +1,15 @@
 import routes from '#routes'
 import store from '#utils/knexStore'
 import 'dotenv/config'
-import express, { Application, json, Request, Response, urlencoded } from 'express'
+import express from 'express'
 import session from 'express-session'
 import swaggerUi from 'swagger-ui-express'
-// @ts-ignore
-import * as swaggerDoc from '../swagger.json'
+import swaggerDoc from '../swagger.json' assert { type: 'json' }
 
 const port = process.env.PORT
 
 const createServer = () => {
-  const app: Application = express()
+  const app = express()
 
   app.use(
     session({
@@ -26,11 +25,11 @@ const createServer = () => {
     })
   )
 
-  app.use(urlencoded({ extended: true }))
-  app.use(json())
+  app.use(express.urlencoded({ extended: true }))
+  app.use(express.json())
   app.use('/api/v1', routes)
   app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
-  app.get('/', (req: Request, res: Response) => {
+  app.get('/', (req, res) => {
     res.send({ message: 'Welcome to the Demo Credit API!' })
   })
 

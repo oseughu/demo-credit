@@ -1,11 +1,9 @@
 import transactionService from '#services/transaction.service'
-import { IGetUserAuthInfoRequest } from '#utils/interface'
-import { Response } from 'express'
 
-let balance: number
+let balance
 
 export default class transactionController {
-  static async deposit(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
+  static async deposit(req, res) {
     try {
       const { amount, description } = req.body
       const { id } = req.user
@@ -26,7 +24,7 @@ export default class transactionController {
     }
   }
 
-  static async transfer(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
+  static async transfer(req, res) {
     try {
       const { amount, description, recipient, confirmRecipient } = req.body
       const { id } = req.user
@@ -54,7 +52,7 @@ export default class transactionController {
     }
   }
 
-  static async withdrawal(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
+  static async withdrawal(req, res) {
     try {
       const { amount, description, recipient, confirmRecipient } = req.body
       const { id } = req.user
@@ -80,7 +78,7 @@ export default class transactionController {
     }
   }
 
-  static async userTransactions(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
+  static async userTransactions(req, res) {
     try {
       const { id } = req.user
 
@@ -93,7 +91,7 @@ export default class transactionController {
     }
   }
 
-  static async singleUserTransaction(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
+  static async singleUserTransaction(req, res) {
     try {
       const { id } = req.user
       const { transactionId } = req.params

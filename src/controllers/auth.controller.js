@@ -1,15 +1,13 @@
 import authService from '#services/auth.service'
-import { IGetUserAuthInfoRequest } from '#utils/interface'
-import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 
 export default class authController {
-  static async register(req: Request, res: Response) {
+  static async register(req, res) {
     try {
       const { firstName, lastName, email, password, confirmPassword } = req.body
 
       if (password !== confirmPassword) {
-        throw new Error('passwords do not match')
+        res.status(400).send({ error: 'passwords do not match' })
       }
 
       authService.register(firstName, lastName, email, password)
@@ -17,11 +15,11 @@ export default class authController {
       res.status(201).send({ status: 'ok', message: 'user created successfully' })
     } catch (err) {
       console.error(err)
-      res.status(500).send({ error: 'Something went wrong' })
+      res.status(400).send({ error: 'user already exists. please login' })
     }
   }
 
-  static async login(req: Request, res: Response) {
+  static async login(req, res) {
     try {
       const { email, password } = req.body
 
@@ -29,7 +27,6 @@ export default class authController {
 
       const token = jwt.sign({ id: user.id }, process.env.SECRET)
 
-      //@ts-ignore
       req.session.jwt = token
 
       res.send({ status: 'ok', message: 'logged in successfully' })
@@ -39,7 +36,7 @@ export default class authController {
     }
   }
 
-  static authUser(req: IGetUserAuthInfoRequest, res: Response) {
+  static authUser(req, res) {
     res.send({
       id: req.user.id,
       email: req.user.email,
@@ -47,7 +44,7 @@ export default class authController {
     })
   }
 
-  static logout(req: Request, res: Response) {
+  static logout(req, res) {
     req.session.destroy((err) => {
       if (err) {
         console.log(err)
