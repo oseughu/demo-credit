@@ -1,5 +1,5 @@
+import config from '#database/knexfile'
 import knex from 'knex'
-import config from './knexfile'
 
 /* NOTE TO SELF: In prod, use dependency injection to create knex instance
 so db access can be mocked for tests */
