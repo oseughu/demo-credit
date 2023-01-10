@@ -28,7 +28,7 @@ const config: IKnexConfig = {
     client: process.env.DB_CLIENT,
     connection: {
       host: process.env.DB_HOST_PROD,
-      port: +process.env.DB_PORT,
+      port: +process.env.DB_PORT_PROD,
       user: process.env.DB_USER_PROD,
       password: process.env.DB_PASSWORD_PROD,
       database: process.env.DB_NAME_PROD
