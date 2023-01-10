@@ -1,6 +1,5 @@
-import db from '#database/db'
 import routes from '#routes'
-import KnexSessionStore from 'connect-session-knex'
+import store from '#utils/knexStore'
 import cors from 'cors'
 import 'dotenv/config'
 import express, { Application, json, Request, Response, urlencoded } from 'express'
@@ -10,15 +9,6 @@ import swaggerUi from 'swagger-ui-express'
 import * as swaggerDoc from '../swagger.json'
 
 const port = process.env.PORT
-// @ts-ignore
-const knexStore = new KnexSessionStore(session)
-const store = new knexStore({
-  knex: db,
-  sidfieldname: 'session_id',
-  clearInterval: 60000,
-  createtable: true,
-  tablename: 'sessions'
-})
 
 const createServer = () => {
   const app: Application = express()
