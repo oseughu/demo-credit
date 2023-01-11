@@ -2,7 +2,7 @@ import errorHandler from '#middleware/error'
 import routes from '#routes'
 import store from '#utils/knexStore'
 import 'dotenv/config'
-import express, { Application, json, Request, Response, urlencoded } from 'express'
+import express, { Express, Request, Response } from 'express'
 import session from 'express-session'
 import swaggerUi from 'swagger-ui-express'
 // @ts-ignore
@@ -11,7 +11,7 @@ import * as swaggerDoc from '../swagger.json'
 const port = process.env.PORT
 
 const createServer = () => {
-  const app: Application = express()
+  const app: Express = express()
 
   app.use(
     session({
@@ -27,8 +27,8 @@ const createServer = () => {
     })
   )
 
-  app.use(urlencoded({ extended: true }))
-  app.use(json())
+  app.use(express.urlencoded({ extended: true }))
+  app.use(express.json())
   app.use(errorHandler)
   app.use('/api/v1', routes)
   app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
