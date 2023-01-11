@@ -1,3 +1,4 @@
+import errorHandler from '#middleware/error'
 import routes from '#routes'
 import store from '#utils/knexStore'
 import 'dotenv/config'
@@ -28,6 +29,7 @@ const createServer = () => {
 
   app.use(urlencoded({ extended: true }))
   app.use(json())
+  app.use(errorHandler)
   app.use('/api/v1', routes)
   app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
   app.get('/', (req: Request, res: Response) => {

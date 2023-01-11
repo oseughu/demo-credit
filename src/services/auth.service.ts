@@ -3,12 +3,6 @@ import bcrypt from 'bcryptjs'
 
 export default class authService {
   static async register(firstName: string, lastName: string, email: string, password: string) {
-    const alreadyExists = await db.select('email').from('users').where('email', '=', `${email}`)
-
-    if (alreadyExists.length !== 0) {
-      throw new Error('user already exists. please login.')
-    }
-
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
@@ -21,11 +15,7 @@ export default class authService {
   }
 
   static async login(email: string, password: string) {
-    const user = await db
-      .select('email', 'password')
-      .from('users')
-      .where('email', '=', `${email}`)
-      .first()
+    const user = await db.select('id', 'email', 'password').from('users').where({ email }).first()
 
     if (!user) {
       throw new Error('user not found. please create an account')

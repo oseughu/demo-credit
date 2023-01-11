@@ -4,10 +4,6 @@ export default class transactionService {
   static async deposit(amount: number, description: string, userId: string): Promise<void> {
     const user = await db.select('balance', 'email').from('users').where({ id: userId }).first()
 
-    if (!user) {
-      throw new Error('user not found.')
-    }
-
     await db('transactions').insert({
       amount,
       type: 'deposit',
@@ -89,7 +85,7 @@ export default class transactionService {
       amount,
       type: 'withdrawal',
       description,
-      recipient: user.email,
+      recipient,
       user_id: userId
     })
 
