@@ -31,10 +31,9 @@ export default class authController {
 
     const token = jwt.sign({ id: user.id }, process.env.SECRET)
 
-    //@ts-ignore
-    req.session.jwt = token
+    // req.session.jwt = token
 
-    res.send({ status: 'ok', message: 'logged in successfully' })
+    res.send({ status: 'ok', message: 'logged in successfully', token })
   }
 
   static authUser(req: IGetUserAuthInfoRequest, res: Response) {

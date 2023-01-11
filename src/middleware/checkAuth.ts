@@ -6,11 +6,10 @@ import jwt from 'jsonwebtoken'
 
 const checkAuth = asyncHandler(
   async (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) => {
-    //@ts-ignore
-    const cookie = req.session.jwt
-    const claims: any = jwt.verify(cookie, process.env.SECRET)
+    const token = req.headers.authorization.split('Bearer ')[1]
+    const claims: any = jwt.verify(token, process.env.SECRET)
 
-    if (!cookie || !claims) {
+    if (!token || !claims) {
       res.status(401)
       throw new Error('not logged in.')
     }
