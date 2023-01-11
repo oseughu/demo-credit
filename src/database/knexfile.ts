@@ -1,11 +1,16 @@
 import 'dotenv/config'
+import type { Knex } from 'knex'
 
-const config = {
+interface IKnexConfig {
+  [key: string]: Knex.Config
+}
+
+const config: IKnexConfig = {
   development: {
     client: process.env.DB_CLIENT,
     connection: {
       host: process.env.DB_HOST_DEV,
-      port: process.env.DB_PORT,
+      port: +process.env.DB_PORT,
       user: process.env.DB_USER_DEV,
       password: process.env.DB_PASSWORD_DEV,
       database: process.env.DB_NAME_DEV
@@ -23,7 +28,7 @@ const config = {
     client: process.env.DB_CLIENT,
     connection: {
       host: process.env.DB_HOST_PROD,
-      port: process.env.DB_PORT_PROD,
+      port: +process.env.DB_PORT_PROD,
       user: process.env.DB_USER_PROD,
       password: process.env.DB_PASSWORD_PROD,
       database: process.env.DB_NAME_PROD
@@ -41,7 +46,7 @@ const config = {
     client: process.env.DB_CLIENT,
     connection: {
       host: process.env.DB_HOST_TEST,
-      port: process.env.DB_PORT,
+      port: +process.env.DB_PORT,
       user: process.env.DB_USER_TEST,
       password: process.env.DB_PASSWORD_TEST,
       database: process.env.DB_NAME_TEST

@@ -36,7 +36,7 @@ git clone https://github.com/oseughu/demo-credit.git
 
 ```
 
-3. Install NPM packages
+2. Install NPM packages
 
 ```sh
 
@@ -44,25 +44,32 @@ npm install
 
 ```
 
-4. Enter your environment variables in a `.env` file you will create
+3. Enter your environment variables in a `.env` file you will create
 
 ```js
 
 NODE_ENV=development
-
 SECRET=
-
-PORT=3005
-
+PORT=
+USER_PASSWORD= # FOR HASHING USER PASSWORD WHEN SEEDING
 DB_CLIENT=
+DB_PORT=
 
-DB_URI_DEV=
+DB_HOST_DEV=
+DB_USER_DEV=
+DB_PASSWORD_DEV=
+DB_NAME_DEV=
 
-DB_URI_PROD=
+DB_HOST_PROD=
+DB_USER_PROD=
+DB_PORT_PROD=
+DB_PASSWORD_PROD=
+DB_NAME_PROD=
 
-DB_URI_TEST=
-
-USER=  # FOR HASHING USER PASSWORD WHEN SEEDING
+DB_HOST_TEST=
+DB_USER_TEST=
+DB_PASSWORD_TEST=
+DB_NAME_TEST=
 
 ```
 

@@ -1,5 +1,7 @@
-export async function up(knex) {
-  return knex.schema.createTable('users', (table) => {
+import { Knex } from 'knex'
+
+export async function up(knex: Knex): Promise<void> {
+  return knex.schema.createTable('users', (table: Knex.TableBuilder) => {
     table.uuid('id').notNullable().primary().unique().defaultTo(knex.raw('(UUID())'))
     table.string('email').notNullable().unique()
     table.string('first_name', 255).notNullable()
@@ -10,6 +12,6 @@ export async function up(knex) {
   })
 }
 
-export async function down(knex) {
+export async function down(knex: Knex): Promise<void> {
   return knex.schema.dropTable('users')
 }
