@@ -1,6 +1,7 @@
 import errorHandler from '#middleware/error'
 import routes from '#routes'
 import store from '#utils/knexStore'
+import cors from 'cors'
 import 'dotenv/config'
 import express, { Express, Request, Response } from 'express'
 import session from 'express-session'
@@ -12,6 +13,8 @@ const port = process.env.PORT
 
 const createServer = () => {
   const app: Express = express()
+
+  app.use(cors())
 
   app.use(
     session({
