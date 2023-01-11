@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken'
 export default class authController {
   static async register(req: Request, res: Response) {
     const { firstName, lastName, email, password, confirmPassword } = req.body
-    const alreadyExists = await db.select('email').from('users').where({ email })
+    const alreadyExists = await db.select().from('users').where({ email })
 
     if (alreadyExists.length !== 0) {
       res.status(400)
