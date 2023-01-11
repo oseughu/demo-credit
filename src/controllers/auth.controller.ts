@@ -11,7 +11,7 @@ export default class authController {
 
     if (alreadyExists.length !== 0) {
       res.status(400)
-      throw new Error('User already exists.')
+      throw new Error('user already exists.')
     }
 
     if (password !== confirmPassword) {

@@ -33,11 +33,11 @@ export default class transactionService {
       .first()
 
     if (!sender) {
-      throw new Error('user not found.')
+      throw new Error('sender not found.')
     }
 
     if (!receiver) {
-      throw new Error('user not found.')
+      throw new Error('recipient not found.')
     }
 
     if (+sender.balance < +amount) {
