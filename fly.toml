@@ -1,6 +1,6 @@
-# fly.toml file generated for demo-credit on 2023-01-09T18:34:44+01:00
+# fly.toml file generated for ose-ughu-lendsqr-be-test on 2023-01-11T18:35:55+01:00
 
-app = "demo-credit"
+app = "ose-ughu-lendsqr-be-test"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
