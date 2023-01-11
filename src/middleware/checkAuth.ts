@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 
 const checkAuth = asyncHandler(
   async (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) => {
+    //@ts-ignore
     const token = req.headers.authorization.split('Bearer ')[1]
     const claims: any = jwt.verify(token, process.env.SECRET)
 
