@@ -8,7 +8,11 @@ export default class transactionService {
     userId: string,
     res: Response
   ): Promise<void> {
-    const user = await db.select('balance', 'email').from('users').where({ id: userId }).first()
+    const user = await db
+      .select('balance', 'email')
+      .from('users')
+      .where('id', '=', `${userId}`)
+      .first()
 
     if (!user) {
       res.status(404)
@@ -24,7 +28,7 @@ export default class transactionService {
     })
 
     await db('users')
-      .where({ id: userId })
+      .where('id', '=', `${userId}`)
       .update({
         balance: +amount + +user.balance
       })
@@ -41,7 +45,7 @@ export default class transactionService {
     const receiver = await db
       .select('balance', 'email')
       .from('users')
-      .where({ email: recipient })
+      .where('email', '=', `${recipient}`)
       .first()
 
     if (!sender) {
@@ -68,7 +72,7 @@ export default class transactionService {
     })
 
     await db('users')
-      .where({ id: userId })
+      .where('id', '=', `${userId}`)
       .update({
         balance: +sender.balance - +amount
       })
@@ -87,7 +91,11 @@ export default class transactionService {
     recipient: string,
     res: Response
   ): Promise<void> {
-    const user = await db.select('balance', 'email').from('users').where({ id: userId }).first()
+    const user = await db
+      .select('balance', 'email')
+      .from('users')
+      .where('id', '=', `${userId}`)
+      .first()
 
     if (!user) {
       res.status(404)
@@ -108,7 +116,7 @@ export default class transactionService {
     })
 
     await db('users')
-      .where({ id: userId })
+      .where('id', '=', `${userId}`)
       .update({
         balance: +user.balance - +amount
       })
@@ -125,7 +133,7 @@ export default class transactionService {
       )
       .from('transactions')
       .join('users', 'transactions.user_id', `users.id`)
-      .where({ user_id: userId })
+      .where('transactions.user_id', '=', `${userId}`)
       .limit(5)
       .offset(1)
 

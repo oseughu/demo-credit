@@ -9,7 +9,7 @@ export default class transactionController {
   static async deposit(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
     const { amount, description } = req.body
     const { id } = req.user
-    const user = await db.select().from('users').where({ id }).first()
+    const user = await db.select().from('users').where('id', '=', `${id}`).first()
 
     if (!user) {
       res.status(404)

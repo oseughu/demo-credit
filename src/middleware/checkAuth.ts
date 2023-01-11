@@ -18,7 +18,7 @@ const checkAuth = asyncHandler(
     req.user = await db
       .select('id', 'first_name', 'last_name', 'email', 'balance')
       .from('users')
-      .where({ id: claims.id })
+      .where('id', '=', `${claims.id}`)
       .first()
 
     next()

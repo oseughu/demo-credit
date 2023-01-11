@@ -1,5 +1,6 @@
 import db from '#database/db'
 import bcrypt from 'bcryptjs'
+import { Response } from 'express'
 
 export default class authService {
   static async register(firstName: string, lastName: string, email: string, password: string) {
@@ -14,16 +15,18 @@ export default class authService {
     })
   }
 
-  static async login(email: string, password: string) {
-    const user = await db.select('id', 'email', 'password').from('users').where({ email }).first()
+  static async login(email: string, password: string, res: Response) {
+    const user = await db.select('id', 'email', 'password').from('users').where('email', '=', `${email}`).first()
 
     if (!user) {
+      res.status(404)
       throw new Error('user not found. please create an account')
     }
 
     const checkPassword = await bcrypt.compare(password, user.password)
 
     if (!checkPassword) {
+      res.status(401)
       throw new Error('invalid credentials.')
     }
 

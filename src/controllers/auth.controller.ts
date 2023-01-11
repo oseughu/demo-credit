@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken'
 export default class authController {
   static async register(req: Request, res: Response) {
     const { firstName, lastName, email, password, confirmPassword } = req.body
-    const alreadyExists = await db.select().from('users').where({ email })
+    const alreadyExists = await db.select().from('users').where('email', '=', `${email}`)
 
     if (alreadyExists.length !== 0) {
       res.status(400)
@@ -27,7 +27,7 @@ export default class authController {
   static async login(req: Request, res: Response) {
     const { email, password } = req.body
 
-    const user = await authService.login(email, password)
+    const user = await authService.login(email, password, res)
 
     const token = jwt.sign({ id: user.id }, process.env.SECRET)
 
