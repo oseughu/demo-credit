@@ -21,6 +21,6 @@
       "#routes": ["./src/routes/index.ts"],
       "#routes/*": ["./src/routes/*.ts"]
     },
-    "typeRoots": ["./types", "./node_modules/@types"]
+    "typeRoots": ["src/types", "./node_modules/@types"]
   }
 }
