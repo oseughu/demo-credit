@@ -1,10 +1,7 @@
 import errorHandler from '#middleware/error'
 import routes from '#routes'
-import store from '#utils/knexStore'
-import cors from 'cors'
 import 'dotenv/config'
 import express, { Express, Request, Response } from 'express'
-import session from 'express-session'
 import swaggerUi from 'swagger-ui-express'
 // @ts-ignore
 import * as swaggerDoc from '../swagger.json'
@@ -13,22 +10,6 @@ const port = process.env.PORT
 
 const createServer = () => {
   const app: Express = express()
-
-  app.use(cors())
-
-  app.use(
-    session({
-      resave: false,
-      saveUninitialized: false,
-      secret: process.env.SECRET,
-      cookie: {
-        maxAge: 24 * 60 * 60 * 100,
-        sameSite: 'none',
-        secure: process.env.NODE_ENV === 'development' ? false : true
-      },
-      store
-    })
-  )
 
   app.use(express.urlencoded({ extended: true }))
   app.use(express.json())
