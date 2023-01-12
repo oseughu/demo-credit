@@ -48,7 +48,7 @@ npm install
 
 3. Enter your environment variables in a `.env` file you will create
 
-```js
+```env
 
 NODE_ENV=development
 SECRET= #FOR SESSIONS AND JWT
