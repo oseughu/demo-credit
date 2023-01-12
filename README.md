@@ -16,6 +16,10 @@ View the postman collection [here](https://documenter.getpostman.com/view/160974
 - Transfers have to be done to another user on demo credit
 - To send to users outside demo credit, make a withdrawal of the amount to the users account number
 
+### Entity Relation Diagram
+
+![ERD Diagram for database.](https://asset.cloudinary.com/dnjugtgyf/6fde43de169fd33104bdf3b488661973)
+
 ### Built With
 
 [![Node.js Logo](https://nodejs.org/static/images/logo-light.svg)](https://nodejs.org)
