@@ -18,7 +18,7 @@ View the postman collection [here](https://documenter.getpostman.com/view/160974
 
 ### Entity Relation Diagram
 
-![ERD Diagram for database.](https://asset.cloudinary.com/dnjugtgyf/6fde43de169fd33104bdf3b488661973)
+![ERD Diagram for database.](https://res.cloudinary.com/dnjugtgyf/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1673507313/db_design_wetqaj.jpg)
 
 ### Built With
 
