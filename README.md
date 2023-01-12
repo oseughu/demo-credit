@@ -8,8 +8,8 @@
 This an API built for a demo credit wallet for the Lendsqr backend engineer assessment.
 Users can deposit, transfer and withdraw funds with a single wallet.
 
-View the docs [here](https://ose-ughu-lendsqr-be-test.fly.dev/api/v1/docs)
-View the postman collection [here](https://documenter.getpostman.com/view/16097477/2s8ZDR7QxL)
+- View the docs [here](https://ose-ughu-lendsqr-be-test.fly.dev/api/v1/docs)
+- View the postman collection [here](https://documenter.getpostman.com/view/16097477/2s8ZDR7QxL)
 
 ### Please Note
 
