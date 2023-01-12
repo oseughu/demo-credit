@@ -12,10 +12,9 @@
   },
   "components": {
     "securitySchemes": {
-      "cookieAuth": {
+      "jwtAuth": {
         "type": "authorization",
-        "in": "cookie",
-        "name": "jwt"
+        "in": "header"
       }
     }
   },
