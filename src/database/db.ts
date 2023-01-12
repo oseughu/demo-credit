@@ -7,12 +7,18 @@ let db: any
 /* NOTE TO SELF: In prod, use dependency injection to create knex instance
 so db access can be mocked for tests */
 
-if (process.env.NODE_ENV === 'development') {
-  db = knex(config.development)
-} else if (process.env.NODE_ENV === 'production') {
-  db = knex(config.production)
-} else if (process.env.NODE_ENV === 'test') {
-  db = knex(config.test)
+switch (process.env.NODE_ENV) {
+  case 'development':
+    db = knex(config.development)
+    break
+  case 'production':
+    db = knex(config.production)
+    break
+  case 'test':
+    db = knex(config.test)
+    break
+  default:
+    db = knex(config.development)
 }
 
 export default db
