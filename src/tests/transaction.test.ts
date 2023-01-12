@@ -1,4 +1,9 @@
-process.env.NODE_ENV = 'test'
+import db from '#database/db'
 import createServer from '#src/app'
+import payload from '#utils/payload'
+import 'dotenv/config'
+import supertest from 'supertest'
 
-const app = createServer()
+process.env.NODE_ENV = 'test'
+
+// const app = createServer()
