@@ -58,6 +58,11 @@ export default class transactionService {
       throw new Error('recipient not found.')
     }
 
+    if (sender.email === receiver.email) {
+      res.status(400)
+      throw new Error('you cannot transfer funds to yourself.')
+    }
+
     if (+sender.balance < +amount) {
       res.status(400)
       throw new Error('insufficient funds. add more funds to your wallet')
