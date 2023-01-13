@@ -65,6 +65,14 @@ DB_URI_TEST=
 
 ```
 
+4. Run Tests
+
+```sh
+
+npm test
+
+```
+
 ## Contact
 
 Twitter - [@oseughu](https://twitter.com/oseughu)
