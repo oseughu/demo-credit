@@ -8,15 +8,5 @@ const transactionRouter = Router()
 transactionRouter.post('/deposit', checkAuth, asyncHandler(transactionController.deposit))
 transactionRouter.post('/transfer', checkAuth, asyncHandler(transactionController.transfer))
 transactionRouter.post('/withdrawal', checkAuth, asyncHandler(transactionController.withdrawal))
-transactionRouter.get(
-  '/transactions',
-  checkAuth,
-  asyncHandler(transactionController.userTransactions)
-)
-transactionRouter.get(
-  '/transactions/:transactionId',
-  checkAuth,
-  asyncHandler(transactionController.singleUserTransaction)
-)
 
 export default transactionRouter
