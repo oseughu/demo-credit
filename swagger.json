@@ -20,13 +20,13 @@
   },
   "servers": [
     {
-      "url": "https://ose-ughu-lendsqr-be-test.fly.dev/api/v1"
+      "url": "https://ose-ughu-lendsqr-be-test.fly.dev/"
     }
   ],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/register": {
+    "api/v1/register": {
       "post": {
         "summary": "Create a new user with 0.00 balance",
         "requestBody": {
@@ -50,7 +50,7 @@
         }
       }
     },
-    "/login": {
+    "api/v1/login": {
       "post": {
         "summary": "Sign in User",
         "requestBody": {
@@ -74,7 +74,7 @@
         }
       }
     },
-    "/user": {
+    "api/v1/user": {
       "get": {
         "summary": "Get the current logged in user",
         "security": { "OAuth2": [] },
@@ -91,7 +91,7 @@
         }
       }
     },
-    "/deposit": {
+    "api/v1/deposit": {
       "post": {
         "summary": "Add funds to your wallet",
         "requestBody": {
@@ -118,7 +118,7 @@
         }
       }
     },
-    "/transfer": {
+    "api/v1/transfer": {
       "post": {
         "summary": "Transfer funds from your wallet to another user on Demo Credit",
         "requestBody": {
@@ -145,7 +145,7 @@
         }
       }
     },
-    "/withdrawal": {
+    "api/v1/withdrawal": {
       "post": {
         "summary": "Withdraw funds from your wallet",
         "requestBody": {
