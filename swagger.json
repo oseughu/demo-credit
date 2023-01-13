@@ -149,7 +149,7 @@
       "post": {
         "summary": "Withdraw funds from your wallet",
         "requestBody": {
-          "description": "A JSON object containing the amount, description (optional) and recipient (can be an external user, must match with confirmRecipient).",
+          "description": "A JSON object containing the amount, description (optional) and recipient (must be a 10 digit account number, must match with confirmRecipient).",
           "required": true,
           "content": {
             "application/json": {
@@ -159,47 +159,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Transaction"
-            }
-          },
-          "401": {
-            "description": "Failed. User not logged in."
-          }
-        }
-      }
-    },
-    "/transactions": {
-      "get": {
-        "summary": "Get transactions of the current logged in user",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Transaction"
-            }
-          },
-          "401": {
-            "description": "Failed. User not logged in."
-          }
-        }
-      }
-    },
-    "/transactions/{transactionId}": {
-      "get": {
-        "parameters": [
-          {
-            "name": "transactionId",
-            "in": "path",
-            "required": true,
-            "description": "ID of the transaction needed",
-            "type": "string"
-          }
-        ],
-        "summary": "Get a transaction of the current logged in user",
         "responses": {
           "200": {
             "description": "OK",
