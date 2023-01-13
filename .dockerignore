@@ -2,4 +2,7 @@ fly.toml
 Dockerfile
 .dockerignore
 node_modules
+build
+.vscode
+.env
 .git
