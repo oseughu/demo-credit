@@ -47,7 +47,15 @@ export default class authController {
   }
 
   static logout(req: Request, res: Response) {
-    //@ts-ignore
-    req.session.destroy()
+    const authHeader = req.headers['authorization']
+    
+    jwt.sign(authHeader, '', { expiresIn: 1 }, (logout, err) => {
+      if (logout) {
+        res.send({ msg: 'You have been Logged Out' })
+      } else {
+        res.status(400)
+        throw new Error('error logging out')
+      }
+    })
   }
 }
