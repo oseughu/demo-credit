@@ -1,6 +1,26 @@
 import db from '#database/db'
 import { Response } from 'express'
 
+const checkValidAmount = (amount: any, res: Response) => {
+  if (isNaN(+amount)) {
+    res.status(400)
+    throw new Error('please input a valid amount')
+  }
+}
+const checkValidAccountNumber = (recipient: any, res: Response) => {
+  if (isNaN(+recipient) || recipient.length !== 10) {
+    res.status(400)
+    throw new Error('please input a valid account number')
+  }
+}
+
+const checkBalance = (amount: number, sender: any, res: Response) => {
+  if (+sender.balance < +amount) {
+    res.status(400)
+    throw new Error('insufficient funds. add more funds to your wallet')
+  }
+}
+
 export default class transactionService {
   static async deposit(
     amount: number,
@@ -13,6 +33,8 @@ export default class transactionService {
       .from('users')
       .where('id', '=', `${userId}`)
       .first()
+
+    checkValidAmount(amount, res)
 
     if (!user) {
       res.status(404)
@@ -63,10 +85,8 @@ export default class transactionService {
       throw new Error('you cannot transfer funds to yourself.')
     }
 
-    if (+sender.balance < +amount) {
-      res.status(400)
-      throw new Error('insufficient funds. add more funds to your wallet')
-    }
+    checkBalance(amount, sender, res)
+    checkValidAmount(amount, res)
 
     await db('transactions').insert({
       amount,
@@ -107,10 +127,15 @@ export default class transactionService {
       throw new Error('user not found.')
     }
 
-    if (+user.balance < +amount) {
-      res.status(400)
-      throw new Error('insufficient funds. add more funds to your wallet')
-    }
+    checkBalance(amount, user, res)
+    checkValidAmount(amount, res)
+    checkValidAccountNumber(recipient, res)
+
+    await db('users')
+      .where('id', '=', `${userId}`)
+      .update({
+        balance: +user.balance - +amount
+      })
 
     await db('transactions').insert({
       amount,
@@ -119,57 +144,5 @@ export default class transactionService {
       recipient,
       user_id: userId
     })
-
-    await db('users')
-      .where('id', '=', `${userId}`)
-      .update({
-        balance: +user.balance - +amount
-      })
-  }
-
-  static async userTransactions(userId: string, res: Response) {
-    const transactions = await db
-      .select(
-        'transactions.id',
-        'transactions.amount',
-        'transactions.description',
-        'transactions.type',
-        'transactions.recipient'
-      )
-      .from('transactions')
-      .join('users', 'transactions.user_id', `users.id`)
-      .where('transactions.user_id', '=', `${userId}`)
-      .limit(5)
-      .offset(1)
-
-    if (!transactions) {
-      res.status(404)
-      throw new Error('user not found.')
-    }
-
-    return transactions
-  }
-
-  static async singleUserTransaction(userId: string, transactionId: string, res: Response) {
-    const transaction = await db
-      .select(
-        'transactions.id',
-        'transactions.amount',
-        'transactions.description',
-        'transactions.type',
-        'transactions.recipient'
-      )
-      .from('transactions')
-      .join('users', 'transactions.user_id', `users.id`)
-      .where('transactions.user_id', '=', `${userId}`)
-      .andWhere('transactions.id', '=', `${transactionId}`)
-      .first()
-
-    if (!transaction) {
-      res.status(404)
-      throw new Error('user not found.')
-    }
-
-    return transaction
   }
 }

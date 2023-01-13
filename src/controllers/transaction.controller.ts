@@ -13,7 +13,7 @@ export default class transactionController {
 
     if (!user) {
       res.status(404)
-      throw new Error('user not found.')
+      throw new Error('user not found')
     }
 
     await transactionService.deposit(amount, description, id, res)
@@ -21,8 +21,7 @@ export default class transactionController {
     balance = +req.user.balance + +amount
 
     res.status(201).send({
-      status: 'ok',
-      message: 'deposit successful.',
+      message: 'deposit successful',
       amount: amount.toLocaleString(),
       balance: balance.toLocaleString()
     })
@@ -43,9 +42,8 @@ export default class transactionController {
 
     balance = +req.user.balance - +amount
 
-    res.send({
-      status: 'ok',
-      message: 'transfer successful.',
+    res.status(201).send({
+      message: 'transfer successful',
       recipient,
       amount: amount.toLocaleString(),
       balance: balance.toLocaleString()
@@ -65,29 +63,11 @@ export default class transactionController {
 
     balance = +req.user.balance - +amount
 
-    res.send({
-      status: 'ok',
-      message: 'withdrawal successful.',
+    res.status(201).send({
+      message: 'withdrawal successful',
       recipient,
       amount: amount.toLocaleString(),
       balance: balance.toLocaleString()
     })
-  }
-
-  static async userTransactions(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
-    const { id } = req.user
-
-    const transactions = await transactionService.userTransactions(id, res)
-
-    res.send(transactions)
-  }
-
-  static async singleUserTransaction(req: IGetUserAuthInfoRequest, res: Response): Promise<void> {
-    const { id } = req.user
-    const { transactionId } = req.params
-
-    const transaction = await transactionService.singleUserTransaction(id, transactionId, res)
-
-    res.send(transaction)
   }
 }
