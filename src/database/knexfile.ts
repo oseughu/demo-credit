@@ -37,9 +37,6 @@ const config: IKnexConfig = {
       min: 0,
       max: 10
     },
-    seeds: {
-      directory: './seeds/test'
-    },
     migrations: {
       tableName: 'knex_migrations'
     }
