@@ -64,7 +64,7 @@ describe('Transactions', () => {
   })
 
   describe('POST /api/v1/transfer', () => {
-    describe('When all required fields are filled with a valid amount and recipient', () => {
+    describe('When all required fields are filled with a valid amount and recipient on demo-credit', () => {
       it('should process the transfer successfully and return status code 201', (done) => {
         supertest(app)
           .post('/api/v1/transfer')
